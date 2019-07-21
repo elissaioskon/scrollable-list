@@ -1,0 +1,14 @@
+node_modules
+
+# babel compiled files
+dist
+
+# webstorm
+.idea
+
+# jest coverage
+coverage
+
+# it is used by parcel
+.cache
+
