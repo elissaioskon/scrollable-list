@@ -11,8 +11,11 @@
     "sourceType": "module",
     "ecmaVersion": 2018
   },
+  "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": "error",
-    "no-console": 0
+    "no-console": 0,
+    "react/no-find-dom-node": 0,
+    "react/destructuring-assignment": 0
   }
 }
