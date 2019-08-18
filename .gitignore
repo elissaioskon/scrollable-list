@@ -9,8 +9,5 @@ dist
 # jest coverage
 coverage
 
-# it is used by parcel
-.cache
-
 # yarn
 yarn-error.log
