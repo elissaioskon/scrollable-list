@@ -21,7 +21,11 @@ to that item. This library makes this task easy to achieve.
 ```jsx
 import React, {useRef, useState} from 'react'
 
-const carsList = [{name:'audi'},{name:'toyota'}, {name:'bmw'}]
+const emojis = [
+  "😀 Grinning Face",
+  "😃 Grinning Face With Big Eyes",
+  "😄 Grinning Face With Smiling Eyes"
+ ]
 
 const App = () => {
     const ref = useRef()
@@ -31,9 +35,9 @@ const App = () => {
       <>
           <ScrollView ref={ref}>
               <div className="list-container">
-                {carsList.map(({name}) => (
+                {emojis.map( emoji => (
                    <ScrollableElement>
-                      <div className="list-item">{name}</div>
+                      <div className="list-item">{emoji}</div>
                    </ScrollableElement>
                 ))}
               </div>

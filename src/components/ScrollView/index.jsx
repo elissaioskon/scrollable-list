@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 export const ScrollContext = React.createContext();
 
+const noop = () => {};
+
 export default class ScrollView extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
@@ -18,28 +20,23 @@ export default class ScrollView extends Component {
   };
 
   /* eslint-disable-next-line react/sort-comp */
-  scrollToPreviousItem = (currentIndex, cb) => {
+  scrollToPreviousItem = (currentIndex, cb = noop) => {
     const previousIndex = currentIndex - 1;
 
-    if (previousIndex <= 0) return;
+    if (previousIndex < 0) return;
 
     this.scrollToIndex(previousIndex);
 
-    if (cb) {
-      cb(previousIndex);
-    }
+    cb(previousIndex);
   };
 
-  scrollToNextItem = (currentIndex, cb) => {
+  scrollToNextItem = (currentIndex, cb = noop) => {
     const nextIndex = currentIndex + 1;
-
-    if (nextIndex > this.registeredElements.length) return;
+    if (nextIndex > this.registeredElements.length - 1) return;
 
     this.scrollToIndex(nextIndex);
 
-    if (cb) {
-      cb(nextIndex);
-    }
+    cb(nextIndex);
   };
 
   scroll = {

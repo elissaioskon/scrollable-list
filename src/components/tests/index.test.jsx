@@ -31,48 +31,82 @@ const App = React.forwardRef((props, ref) => (
   </ScrollView>
 ));
 
-afterEach(() => {
-  jest.clearAllMocks();
-  jest.resetAllMocks();
-});
-
 describe('Scrollable-list library', () => {
   // ScrollIntoView is not implemented in JSdom so we need to mock it.
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
 
-  it('should scroll to appropriate list item when scroll.toIndex is called', () => {
+  it('should scroll to appropriate list item and should call cb when scroll.toIndex is called', () => {
     const scrollViewRef = React.createRef();
+    const cb = jest.fn();
 
-    const scrollToLastElement = () =>
-      scrollViewRef.current.scroll.toIndex(items.length - 1);
+    const indexToScroll = 2;
 
     render(<App ref={scrollViewRef} />);
-    scrollToLastElement();
+    scrollViewRef.current.scroll.toIndex(indexToScroll, cb);
 
     expect(
-      scrollViewRef.current.registeredElements[items.length - 1].scrollIntoView
+      scrollViewRef.current.registeredElements[indexToScroll].scrollIntoView
     ).toHaveBeenCalledTimes(1);
+
+    expect(cb).toHaveBeenNthCalledWith(1, indexToScroll);
   });
 
-  it('should scroll to next list item when scroll.toNextItem is called', () => {
+  it('should scroll to next list item and should call cb when scroll.toNextItem is called', () => {
     const scrollViewRef = React.createRef();
+    const cb = jest.fn();
 
     render(<App ref={scrollViewRef} />);
-    scrollViewRef.current.scroll.toIndex(0);
+    scrollViewRef.current.scroll.toNextItem(0, cb);
 
     expect(
       scrollViewRef.current.registeredElements[1].scrollIntoView
     ).toHaveBeenCalledTimes(1);
+
+    expect(cb).toHaveBeenNthCalledWith(1, 1);
   });
 
-  it('should scroll to previous list item when scroll.toNextItem is called', () => {
+  it("should not scroll when scroll.toNextItem is called with first argument the last item's index", () => {
     const scrollViewRef = React.createRef();
+    const cb = jest.fn();
 
     render(<App ref={scrollViewRef} />);
-    scrollViewRef.current.scroll.toIndex(1);
+
+    const lastElementIndex = items.length - 1;
+    scrollViewRef.current.scroll.toNextItem(lastElementIndex, cb);
+
+    expect(
+      scrollViewRef.current.registeredElements[lastElementIndex].scrollIntoView
+    ).not.toHaveBeenCalled();
+
+    expect(cb).not.toHaveBeenCalled();
+  });
+
+  it('should scroll to previous list item and should not call cb when scroll.toNextItem is called', () => {
+    const scrollViewRef = React.createRef();
+    const cb = jest.fn();
+
+    render(<App ref={scrollViewRef} />);
+    scrollViewRef.current.scroll.toPreviousItem(1, cb);
 
     expect(
       scrollViewRef.current.registeredElements[0].scrollIntoView
     ).toHaveBeenCalledTimes(1);
+
+    expect(cb).toHaveBeenNthCalledWith(1, 0);
+  });
+
+  it('should not scroll and should not call cb when scroll.toPreviousItem is called with first argument 0', () => {
+    const scrollViewRef = React.createRef();
+    const cb = jest.fn();
+
+    render(<App ref={scrollViewRef} />);
+
+    scrollViewRef.current.scroll.toPreviousItem(0, cb);
+
+    expect(
+      scrollViewRef.current.registeredElements[0].scrollIntoView
+    ).not.toHaveBeenCalled();
+
+    expect(cb).not.toHaveBeenCalled();
   });
 });
