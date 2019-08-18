@@ -50,6 +50,15 @@
     "lint": "eslint",
     "commit": "git-cz"
   },
+  "description": "Scroll to an element within a list easily \uD83D\uDE03",
+  "keywords": [
+    "scroll",
+    "scrollable list",
+    "scrollable item",
+    "scrollTo",
+    "scrollView",
+    "scrollableElement"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
