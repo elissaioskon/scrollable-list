@@ -9,6 +9,8 @@
 
 > Scroll to an element within a list easily 😃
 
+![](animation.gif)
+
 ## Motivation
 
 A common ui scenario is a list with some items. User should be able to move on next item in the list
