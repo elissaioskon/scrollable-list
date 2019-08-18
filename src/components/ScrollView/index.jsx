@@ -9,22 +9,37 @@ export default class ScrollView extends Component {
   };
 
   /* eslint-disable-next-line react/sort-comp */
-  scrollToPreviousItem = currentIndex => {
+  scrollToIndex = (index, cb) => {
+    this.registeredElements[index].scrollIntoView();
+
+    if (cb) {
+      cb(index);
+    }
+  };
+
+  /* eslint-disable-next-line react/sort-comp */
+  scrollToPreviousItem = (currentIndex, cb) => {
     const previousIndex = currentIndex - 1;
 
     if (previousIndex <= 0) return;
 
     this.scrollToIndex(previousIndex);
+
+    if (cb) {
+      cb(previousIndex);
+    }
   };
 
-  scrollToIndex = index => this.registeredElements[index].scrollIntoView();
-
-  scrollToNextItem = currentIndex => {
+  scrollToNextItem = (currentIndex, cb) => {
     const nextIndex = currentIndex + 1;
 
     if (nextIndex > this.registeredElements.length) return;
 
     this.scrollToIndex(nextIndex);
+
+    if (cb) {
+      cb(nextIndex);
+    }
   };
 
   scroll = {
