@@ -1,15 +1,15 @@
 # Scrollable List
 
-<!---
-[![CircleCI](https://img.shields.io/circleci/build/gh/elissaioskon/react-use-lifecycle-hooks/master)](https://circleci.com/gh/elissaioskon/lifecycle-hooks/tree/master)
-[![Npm](https://img.shields.io/npm/v/react-use-lifecycle-hooks)](https://www.npmjs.com/package/react-use-lifecycle-hooks) 
-[![Codecov](https://img.shields.io/codecov/c/github/elissaioskon/lifecycle-hooks)](https://codecov.io/gh/elissaioskon/lifecycle-hooks) 
-[![Licence](https://img.shields.io/github/license/elissaioskon/lifecycle-hooks)](https://github.com/elissaioskon/lifecycle-hooks/blob/master/LICENSE)
--->  
+[![CircleCI](https://img.shields.io/circleci/build/github/elissaioskon/scrollable-list)](https://circleci.com/gh/elissaioskon/scrollable-list/tree/master)
+[![Npm](https://img.shields.io/npm/v/@elissaioskon/scrollable-list)](https://www.npmjs.com/package/@elissaioskon/scrollable-list) 
+[![Codecov](https://img.shields.io/codecov/c/github/elissaioskon/scrollable-list)](https://img.shields.io/codecov/c/github/elissaioskon/scrollable-list) 
+[![Licence](https://img.shields.io/github/license/elissaioskon/scrollable-list)](https://github.com/elissaioskon/scrollable-list/blob/master/LICENSE)
 
-> Scroll to an element within a list easily 😃
+> Scroll to an element within a list easily 😃  
 
-![](animation.gif)
+[Codesandbox example](https://codesandbox.io/s/scrollable-list-example-3id28?fontsize=14)
+<br>
+[![](animation.gif)](https://codesandbox.io/s/scrollable-list-example-3id28?fontsize=14) 
 
 ## Motivation
 
@@ -29,13 +29,13 @@ const App = () => {
     
     return (
       <>
-          <ScrollView ref={ref}}>
+          <ScrollView ref={ref}>
               <div className="list-container">
                 {carsList.map(({name}) => (
                    <ScrollableElement>
                       <div className="list-item">{name}</div>
                    </ScrollableElement>
-                )}
+                ))}
               </div>
           </ScrollView>
           

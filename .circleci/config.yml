@@ -46,6 +46,7 @@ jobs:
       - run: yarn lint
       - run: yarn test --collectCoverage --silent
       - run: yarn build
+      - run: yarn codecov
 
       - persist_to_workspace:
           root: ~/repo
