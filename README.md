@@ -5,38 +5,42 @@
 [![Npm](https://img.shields.io/npm/v/react-use-lifecycle-hooks)](https://www.npmjs.com/package/react-use-lifecycle-hooks) 
 [![Codecov](https://img.shields.io/codecov/c/github/elissaioskon/lifecycle-hooks)](https://codecov.io/gh/elissaioskon/lifecycle-hooks) 
 [![Licence](https://img.shields.io/github/license/elissaioskon/lifecycle-hooks)](https://github.com/elissaioskon/lifecycle-hooks/blob/master/LICENSE)
--->
+-->  
 
-> Scroll to an element within a list easily
+> Scroll to an element within a list easily 😃
 
 ## Motivation
 
-A common ui scenario is a list with some elements. User should be able to move on next element in the list
-on some keypress (e.g down button) and the scroll should move to that element too. In order to achieve that with react
-we should keep ref for every list item and move scroll to that ref on some event. This library makes this task 
-easy to achieve. 
+A common ui scenario is a list with some items. User should be able to move on next item in the list
+on some keypress (e.g on down arrow click) and the scroll should move to that element too. 
+In order to achieve that with react, a ref should be kept for every list item in order to move scroll 
+to that item. This library makes this task easy to achieve. 
 
 ```jsx
-import React from 'react'
+import React, {useRef, useState} from 'react'
+
+const carsList = [{name:'audi'},{name:'toyota'}, {name:'bmw'}]
 
 const App = () => {
-    const cars = [{name:'audi'},{name:'toyota'}, {name:'bmw'}]
     const ref = useRef()
+    const [currentScrollIndex, setCurrentScrollIndex] = useState(0)
     
     return (
-      <React.Fragment>
+      <>
           <ScrollView ref={ref}}>
-            {cars.map(({name}) => (
-               <ScrollableElement>
-                  {name}
-               </ScrollableElement>
-            )}
+              <div className="list-container">
+                {carsList.map(({name}) => (
+                   <ScrollableElement>
+                      <div className="list-item">{name}</div>
+                   </ScrollableElement>
+                )}
+              </div>
           </ScrollView>
           
-         <button onClick = {()=> ref.current.scroll.toNextItem()}></button>
-         <button onClick = {()=> ref.current.scroll.toPreviousItem()}></button>
-         <button onClick = {()=> ref.current.scroll.toIndex(5)}></button>
-      </React.Fragment>
+         <button onClick = {()=> ref.current.scroll.toPreviousItem(currentScrollIndex, setCurrentScrollIndex)}>Scroll to Previous</button>
+         <button onClick = {()=> ref.current.scroll.toNextItem(currentScrollIndex, setCurrentScrollIndex)}>Scroll to Next</button>
+         <button onClick = {()=> ref.current.scroll.toIndex(5, setCurrentScrollIndex)}>Scroll to fifth Item</button>
+      </>
     )
 }
 ```
@@ -54,12 +58,6 @@ const App = () => {
 
 ### API
 
+- [`ScrollView`](./docs/ScrollView.md) 
+- [`ScrollableElement`](./docs/ScrollableElement.md) 
 
-/*
-TESTS
-API README COMPONENTS
-BADGES
-TEST AGAIN IF IT WORKS, CODESANDBOX with emoticons, update readme with emoticons, publish
-
-
-*/
