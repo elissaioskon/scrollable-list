@@ -20,7 +20,7 @@ workflows:
               only: /^v.*/
             branches:
               only:
-                - master
+               - master
 
 jobs:
   checks_and_build:
@@ -40,7 +40,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/.cache/yarn
+           - ~/.cache/yarn
           key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
       - run: yarn lint
