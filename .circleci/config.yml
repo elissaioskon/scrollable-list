@@ -57,4 +57,4 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo
-      - run: yarn semantic-release
+      - run: yarn semantic-release --access=public
